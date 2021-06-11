@@ -14,6 +14,7 @@ const Layout = React.lazy(() => import("./Layout/Layout"));
 const PageNotFound = React.lazy(() => import("./views/PageNotFound"));
 const ForgotPassword = React.lazy(() => import("./views/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("./views/ResetPassword"));
+ 
 
 function App() {
   return (
