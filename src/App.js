@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { Suspense } from "react";
 import { routes } from './Navigation';
 import { toast } from "react-toastify";

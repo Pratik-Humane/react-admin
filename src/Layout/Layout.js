@@ -7,7 +7,7 @@ import { Redirect, Switch, withRouter } from "react-router-dom";
 import { userProfile } from "../actions";
 import { toast } from 'react-toastify';
 import LoginService from "../services/LoginService";
-const { getUserInfo, verifyToken } = LoginService();
+const { getUserInfo, verifyToken, refreshAccessToken } = LoginService();
 
 class Layout extends Component {
   state = {
@@ -39,8 +39,15 @@ class Layout extends Component {
       verifyToken().then(async (res) => {
         let response = await res;
         if (response.data.status === 400) {
-          this.setState({ isExpired: true });
-          localStorage.removeItem("token");
+          refreshAccessToken({ token: localStorage.getItem("refreshToken")}).then(async(res)=>{
+            let resp = await res;
+            if (resp.data.status === 200) {
+              localStorage.setItem('token', resp.data.result);
+            }else{
+              this.setState({ isExpired: true });
+              localStorage.removeItem("token");
+            }
+          });
         }
       });
     }, 5000);

@@ -17,6 +17,7 @@ const loginHandler = (logindata,e) => {
     let response = await res;
     if (response.data.status === 200) {
       localStorage.setItem("token", response.data.result);
+      localStorage.setItem("refreshToken", response.data.refresh);
       action.dispatch(loginUser(response.data.result));
       toast.success(response.data.message, {
         position: toast.POSITION.TOP_RIGHT,
@@ -73,11 +74,7 @@ const getUserProfileData = async () => {
     if (response.data.status === 200) {
       let userinfo = response.data.result;
       action.dispatch(userProfile(userinfo));
-    } else {
-      toast.error(response.data.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
+    } 
   });
 };
 

@@ -39,6 +39,15 @@ const verifyToken = function () {
   });
 }
 
+// refresh token api
+const refreshAccessToken = function(tokendata){
+  return axios({
+    method: "post",
+    url: `${API_URL}/refresh-token`,
+    data: tokendata
+  });
+}
+
 // get user info api
 const getUserInfo = function () {
   return axios({
@@ -57,6 +66,7 @@ const LoginService = () => {
     resetUserPassword,
     verifyToken,
     getUserInfo,
+    refreshAccessToken
   };
 }
 
